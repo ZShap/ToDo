@@ -1,15 +1,17 @@
+import sys
 todos = []
 
-def print_todos(text):
-    pass
+def print_todos():
+    for i, text in enumerate(todos):
+        print(i, text)
 def add_todo(text):
     todos.append(text)
 def change_todo(index, text):
-    pass
+    todos[index] = text
 def delete_todo(index):
-    pass
+    del todos[index]
 def ex_todo():
-    pass
+    quit()
 
 menu = "1. Print\n"\
        "2. Add\n"\
@@ -26,14 +28,18 @@ while True:
         print_todos()
         continue
     elif command == '2':
+        text = input()
         add_todo(text)
         continue
     elif command == '3':
+        index = int(input())
+        text = input()
         change_todo(index, text)
         continue
     elif command == '4':
+        index = int(input())
         delete_todo(index)
         continue
-    elif command == '5':
-        ex_todo()
+    elif command == '0':
+        sys.exit()
         continue

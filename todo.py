@@ -35,12 +35,12 @@ while True:
         continue
     elif command == '2':
       #text = input("Write your case: ")
-        case = {input("Write your case: "): False}
+        case = {'text': input("Write your case: "), 'status': False}
         add_todo(case)
         continue
     elif command == '3':
         index = int(input("Enter case number to change: "))
-        case = {input("Write your case: "): False}
+        case = {'text': input("Write your case: "), 'status': False}
         change_todo(index, case)
         continue
     elif command == '4':

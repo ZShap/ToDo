@@ -10,10 +10,16 @@ def change_todo(index, case):
     todos[index] = case
 def delete_todo(index):
     del todos[index]
-def choose_case():
-    pass
-def delete_choose():
-    pass
+def mark_case(index):
+    if todos[index]['status'] == False:
+        todos[index]['status'] = True
+    else:
+        todos[index]['status'] = False
+def delete_mark_case:
+    for i in todos():
+        if todos[i]['status'] == True:
+            todos.remove(i)
+
 def ex_todo():
     quit()
 
@@ -27,7 +33,7 @@ menu = "1. Print\n"\
 while True:
     print(menu)
     command = input("Enter a number: ")
-    if command not in "12340":
+    if command not in "1234560":
         print("Error")
         continue
     elif command == '1':
@@ -48,9 +54,11 @@ while True:
         delete_todo(index)
         continue
     elif command == '5':
+        index = int(input("Enter case number to mark: "))
+        mark_case(index)
         continue
     elif command == '6':
-        continue
+        delete_mark_case()
     elif command == '0':
         sys.exit()
         continue

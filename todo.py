@@ -1,11 +1,13 @@
 import sys
 todos = []
-
+#with open('test.txt') as f:
 def print_todos():
    for i, case in enumerate(todos):
         print(i, '.', case)
 def add_todo(case):
     todos.append(case)
+    #with open('test.txt') as f:
+        #f.write()
 def change_todo(index, case):
     todos[index] = case
 def delete_todo(index):
@@ -15,9 +17,9 @@ def mark_case(index):
         todos[index]['status'] = True
     else:
         todos[index]['status'] = False
-def delete_mark_case:
-    for i in todos():
-        if todos[i]['status'] == True:
+def delete_mark_case():
+    for i in todos:
+        if i['status'] == True:
             todos.remove(i)
 
 def ex_todo():

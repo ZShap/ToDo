@@ -1,37 +1,65 @@
 import sys
+import json
+import os
+
 todos = []
-#with open('test.txt') as f:
+
+
 def print_todos():
-   for i, case in enumerate(todos):
+    for i, case in enumerate(todos):
         print(i, '.', case)
+
+
 def add_todo(case):
     todos.append(case)
-    #with open('test.txt') as f:
-        #f.write()
+
+
 def change_todo(index, case):
     todos[index] = case
+
+
 def delete_todo(index):
     del todos[index]
+
+
 def mark_case(index):
-    if todos[index]['status'] == False:
-        todos[index]['status'] = True
-    else:
-        todos[index]['status'] = False
-def delete_mark_case():
-    for i in todos:
-        if i['status'] == True:
-            todos.remove(i)
+    todos[index]['status'] = not todos[index]['status']
+
+
+# def mark_all_case(todos):
+#     todos = list(map(lambda x: x['status'], todos))
+#     return todos
+
+
+def delete_mark_case(todos):
+    # for i in todos:
+    # if i['status'] == True:
+    # todos.remove(i)
+    todos = list(filter(lambda x: not x['status'], todos))
+    return todos
+
 
 def ex_todo():
     quit()
 
-menu = "1. Print\n"\
-       "2. Add\n"\
-       "3. Change\n"\
-       "4. Delete\n"\
-       "5. Choose a case\n"\
-       "6. Delete choose case\n"\
+
+menu = "1. Print\n" \
+       "2. Add\n" \
+       "3. Change\n" \
+       "4. Delete\n" \
+       "5. Choose a case\n" \
+       "6. Choose all case\n" \
+       "7. Delete choose case\n" \
        "0. Exit\n"
+
+if os.path.exists('todo.json'):
+    with open('todo.json') as todofile:
+        try:
+            todos = json.load(todofile, )
+        except json.JSONDecodeError:
+            todos = []
+print(todos)
+
 while True:
     print(menu)
     command = input("Enter a number: ")
@@ -42,7 +70,6 @@ while True:
         print_todos()
         continue
     elif command == '2':
-      #text = input("Write your case: ")
         case = {'text': input("Write your case: "), 'status': False}
         add_todo(case)
         continue
@@ -59,8 +86,12 @@ while True:
         index = int(input("Enter case number to mark: "))
         mark_case(index)
         continue
-    elif command == '6':
-        delete_mark_case()
+    # elif command == '6':
+    #     mark_all_case()
+    #     continue
+    elif command == '7':
+        todos = delete_mark_case(todos)
     elif command == '0':
-        sys.exit()
-        continue
+        break
+with open('todo.json', 'w') as todofile:
+    json.dump(todos, todofile)
